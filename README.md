@@ -6,7 +6,6 @@ The project is based on a small web service which uses the following technologie
 * Spring MVC with Spring Boot
 * Database H2 (In-Memory)
 * Maven
-* Intellij as IDE is preferred but not mandatory. We do provide code formatter for intellij and eclipse in the etc folder.
 
  * The architecture of the web service is built with the following components:
    * DataTransferObjects: Objects which are used for outside communication via the API
