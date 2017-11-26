@@ -15,12 +15,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-public class MyappServerApplicantTestApplication extends WebMvcConfigurerAdapter
+public class MyappServer extends WebMvcConfigurerAdapter
 {
 
     public static void main(String[] args)
     {
-        SpringApplication.run(MyappServerApplicantTestApplication.class, args);
+        SpringApplication.run(MyappServer.class, args);
     }
 
 
@@ -45,7 +45,7 @@ public class MyappServerApplicantTestApplication extends WebMvcConfigurerAdapter
 
     private ApiInfo generateApiInfo()
     {
-        return new ApiInfo("myapp Server Applicant Test Service", "This service is to check the technology knowledge of a server applicant for myapp.", "Version 1.0 - mw",
-            "urn:tos", "career@myapp.com", "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0");
+        return new ApiInfo("myapp Server", "This service is to experiment with Spring Boot.", "Version 1.0 - mw",
+            "urn:tos", "contact@alexmanrique.com", "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0");
     }
 }

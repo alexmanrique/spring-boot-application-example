@@ -15,9 +15,9 @@ The project is based on a small web service which uses the following technologie
    * DomainObjects: Functional Objects which might be persisted in the database.
 
 # How to start the app
-You should be able to start the example application by executing com.myapp.MyappServerApplicantTestApplication, which starts a webserver on port 8080 (http://localhost:8080) and serves SwaggerUI where can inspect and try existing endpoints.
+You should be able to start the example application by executing com.myapp.MyappServer, which starts a webserver on port 8080 (http://localhost:8080) and serves SwaggerUI where can inspect and try existing endpoints.
 
-# Useful commands 
+# Useful commands
 Useful curl commands to test. It can be tested with swagger also: http://localhost:8080/swagger-ui.html
 
 ```
