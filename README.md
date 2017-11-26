@@ -1,7 +1,4 @@
-Spring boot application example
-
-# How to start the app
-You should be able to start the example application by executing com.myapp.MyappServerApplicantTestApplication, which starts a webserver on port 8080 (http://localhost:8080) and serves SwaggerUI where can inspect and try existing endpoints.
+# Spring boot application example
 
 The project is based on a small web service which uses the following technologies:
 
@@ -18,10 +15,16 @@ The project is based on a small web service which uses the following technologie
    * DataAccessObjects: Interface for the database. Inserts, updates, deletes and reads objects from the database.
    * DomainObjects: Functional Objects which might be persisted in the database.
 
+# How to start the app
+You should be able to start the example application by executing com.myapp.MyappServerApplicantTestApplication, which starts a webserver on port 8080 (http://localhost:8080) and serves SwaggerUI where can inspect and try existing endpoints.
+
+# Useful commands 
 Useful curl commands to test. It can be tested with swagger also: http://localhost:8080/swagger-ui.html
 
+```
 curl -u user:password "http://localhost:8080/v1/cars"
 curl -u user:password "http://localhost:8080/v1/drivers?onlineStatus=ONLINE"
 curl -u user:password "http://localhost:8080/v1/drivers?onlineStatus=ONLINE&deleted=false"
 curl -u user:password "http://localhost:8080/v1/drivers?onlineStatus=ONLINE&deleted=false&username=driver01"
 curl -u user:password -X PUT "http://localhost:8080/v1/drivers/4/car/4545PWR"
+```
