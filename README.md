@@ -15,7 +15,68 @@ The project is based on a small web service which uses the following technologie
    * DomainObjects: Functional Objects which might be persisted in the database.
 
 # How to start the app
-You should be able to start the example application by executing com.myapp.MyappServer, which starts a webserver on port 8080 (http://localhost:8080) and serves SwaggerUI where can inspect and try existing endpoints.
+
+## Prerequisites
+
+- Java 8 or higher (Java 17 tested and working)
+- Maven (or use the included Maven Wrapper)
+
+## Build the application
+
+To compile the application, run:
+
+```bash
+./mvnw clean compile
+```
+
+Or if you have Maven installed globally:
+
+```bash
+mvn clean compile
+```
+
+## Run the application
+
+### Using Maven Spring Boot plugin (recommended)
+
+```bash
+./mvnw spring-boot:run
+```
+
+Or with Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+### Using the compiled JAR
+
+First, build the JAR:
+
+```bash
+./mvnw clean package
+```
+
+Then run it:
+
+```bash
+java -jar target/myapp_server-0.0.1-SNAPSHOT.jar
+```
+
+## Access the application
+
+Once the application is running, you can access:
+
+- **Swagger UI**: http://localhost:8080/swagger-ui.html
+- **API Base URL**: http://localhost:8080
+- **H2 Console**: http://localhost:8080/h2-console (if enabled)
+
+The application starts a web server on port 8080 and serves SwaggerUI where you can inspect and try existing endpoints.
+
+## Notes
+
+- The application is configured to work with Java 9+ (including Java 17) by including necessary JAXB dependencies and JVM arguments.
+- Default credentials for basic authentication: `user` / `password`
 
 # Useful commands
 Useful curl commands to test. It can be tested with swagger also: http://localhost:8080/swagger-ui.html
