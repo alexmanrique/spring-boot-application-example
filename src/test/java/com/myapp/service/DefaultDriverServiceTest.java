@@ -8,24 +8,26 @@ import com.myapp.domainvalue.OnlineStatus;
 import com.myapp.exception.ConstraintsViolationException;
 import com.myapp.exception.EntityNotFoundException;
 import com.myapp.service.driver.DefaultDriverService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class DefaultDriverServiceTest {
 
     @Mock
@@ -36,7 +38,7 @@ public class DefaultDriverServiceTest {
 
     private DriverDO testDriver;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         testDriver = new DriverDO("driver1", "password");
         testDriver.setId(1L);
@@ -45,7 +47,7 @@ public class DefaultDriverServiceTest {
 
     @Test
     public void findDriver_success() throws EntityNotFoundException {
-        when(driverRepository.findOne(1L)).thenReturn(testDriver);
+        when(driverRepository.findById(1L)).thenReturn(Optional.of(testDriver));
 
         DriverDO result = driverService.find(1L);
 
@@ -53,11 +55,13 @@ public class DefaultDriverServiceTest {
         assertEquals("driver1", result.getUsername());
     }
 
-    @Test(expected = EntityNotFoundException.class)
-    public void findDriver_notFound() throws EntityNotFoundException {
-        when(driverRepository.findOne(99L)).thenReturn(null);
+    @Test
+    public void findDriver_notFound() {
+        when(driverRepository.findById(99L)).thenReturn(Optional.empty());
 
-        driverService.find(99L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            driverService.find(99L);
+        });
     }
 
     @Test
@@ -71,32 +75,36 @@ public class DefaultDriverServiceTest {
         verify(driverRepository).save(testDriver);
     }
 
-    @Test(expected = ConstraintsViolationException.class)
-    public void createDriver_duplicateUsername() throws ConstraintsViolationException {
+    @Test
+    public void createDriver_duplicateUsername() {
         when(driverRepository.save(testDriver)).thenThrow(new DataIntegrityViolationException("duplicate"));
 
-        driverService.create(testDriver);
+        assertThrows(ConstraintsViolationException.class, () -> {
+            driverService.create(testDriver);
+        });
     }
 
     @Test
     public void deleteDriver_success() throws EntityNotFoundException {
-        when(driverRepository.findOne(1L)).thenReturn(testDriver);
+        when(driverRepository.findById(1L)).thenReturn(Optional.of(testDriver));
 
         driverService.delete(1L);
 
         assertTrue(testDriver.getDeleted());
     }
 
-    @Test(expected = EntityNotFoundException.class)
-    public void deleteDriver_notFound() throws EntityNotFoundException {
-        when(driverRepository.findOne(99L)).thenReturn(null);
+    @Test
+    public void deleteDriver_notFound() {
+        when(driverRepository.findById(99L)).thenReturn(Optional.empty());
 
-        driverService.delete(99L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            driverService.delete(99L);
+        });
     }
 
     @Test
     public void updateLocation_success() throws EntityNotFoundException, ConstraintsViolationException {
-        when(driverRepository.findOne(1L)).thenReturn(testDriver);
+        when(driverRepository.findById(1L)).thenReturn(Optional.of(testDriver));
         when(driverRepository.save(testDriver)).thenReturn(testDriver);
 
         driverService.updateLocation(1L, 13.4050, 52.5200);
@@ -106,17 +114,19 @@ public class DefaultDriverServiceTest {
         assertEquals(13.4050, testDriver.getCoordinate().getLongitude(), 0.0001);
     }
 
-    @Test(expected = EntityNotFoundException.class)
-    public void updateLocation_driverNotFound() throws EntityNotFoundException, ConstraintsViolationException {
-        when(driverRepository.findOne(99L)).thenReturn(null);
+    @Test
+    public void updateLocation_driverNotFound() {
+        when(driverRepository.findById(99L)).thenReturn(Optional.empty());
 
-        driverService.updateLocation(99L, 13.4050, 52.5200);
+        assertThrows(EntityNotFoundException.class, () -> {
+            driverService.updateLocation(99L, 13.4050, 52.5200);
+        });
     }
 
     @Test
     public void updateCar_success() throws EntityNotFoundException, ConstraintsViolationException {
         CarDO car = new CarDO("ABC123", 4, false, 8, EngineType.GAS, "BMW");
-        when(driverRepository.findOne(1L)).thenReturn(testDriver);
+        when(driverRepository.findById(1L)).thenReturn(Optional.of(testDriver));
         when(driverRepository.save(testDriver)).thenReturn(testDriver);
 
         driverService.updateCar(1L, car);

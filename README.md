@@ -5,10 +5,12 @@
 
 The project is based on a small web service which uses the following technologies:
 
-- Java 1.8
-- Spring MVC with Spring Boot
+- Java 17
+- Spring Boot 3.3.5
+- Spring MVC
 - Database H2 (In-Memory)
 - Maven
+- JUnit 5 for testing
 
 - The architecture of the web service is built with the following components:
   - DataTransferObjects: Objects which are used for outside communication via the API
@@ -76,10 +78,26 @@ Once the application is running, you can access:
 
 The application starts a web server on port 8080 and serves SwaggerUI where you can inspect and try existing endpoints.
 
+## Running tests
+
+To run all tests:
+
+```bash
+./mvnw test
+```
+
+Or with Maven:
+
+```bash
+mvn test
+```
+
 ## Notes
 
-- The application is configured to work with Java 9+ (including Java 17) by including necessary JAXB dependencies and JVM arguments.
+- The application uses Java 17 and Spring Boot 3.3.5
+- Tests are written using JUnit 5
 - Default credentials for basic authentication: `user` / `password`
+- The compiler is configured with `-parameters` flag for Spring MVC parameter name resolution
 
 # Useful commands
 

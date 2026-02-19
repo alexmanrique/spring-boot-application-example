@@ -1,10 +1,11 @@
 package com.myapp.domainvalue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GeoCoordinateTest {
 
@@ -18,24 +19,32 @@ public class GeoCoordinateTest {
         assertNotNull(coord.getPoint());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void latitudeTooHigh() {
-        new GeoCoordinate(91.0, 0.0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new GeoCoordinate(91.0, 0.0);
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void latitudeTooLow() {
-        new GeoCoordinate(-91.0, 0.0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new GeoCoordinate(-91.0, 0.0);
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void longitudeTooHigh() {
-        new GeoCoordinate(0.0, 181.0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new GeoCoordinate(0.0, 181.0);
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void longitudeTooLow() {
-        new GeoCoordinate(0.0, -181.0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new GeoCoordinate(0.0, -181.0);
+        });
     }
 
     @Test
