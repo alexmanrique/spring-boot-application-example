@@ -4,6 +4,7 @@ import com.myapp.controller.CarController;
 import com.myapp.domainobject.CarDO;
 import com.myapp.domainvalue.EngineType;
 import com.myapp.service.car.CarService;
+import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -19,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -70,6 +73,40 @@ public class CarControllerTest {
         String expected = "{\"licensePlate\":\"546PW\",\"seatCount\":4,\"convertible\":false,\"rating\":10,\"engineType\":\"GAS\",\"manufacturer\":\"MERCEDES\"}";
 
         JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
+    }
+
+    @Test
+    public void deleteCar() throws Exception {
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .delete("/v1/cars/" + LICENSE_PLATE)
+                .accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        MockHttpServletResponse response = result.getResponse();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
+
+    @Test
+    public void findAllCars() throws Exception {
+
+        CarDO car2 = new CarDO("789XY", 2, true, 9, EngineType.ELECTRIC, "TESLA");
+        Mockito.when(carService.findAll()).thenReturn(Arrays.asList(carDOResult, car2));
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
+                "/v1/cars").accept(
+                MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        MockHttpServletResponse response = result.getResponse();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+        String expected = "[{\"licensePlate\":\"546PW\",\"seatCount\":4},{\"licensePlate\":\"789XY\",\"seatCount\":2}]";
+        JSONAssert.assertEquals(expected, response.getContentAsString(), false);
     }
 
 }

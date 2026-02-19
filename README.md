@@ -1,3 +1,6 @@
+![Build](https://github.com/alexmanrique/spring-boot-application-example/actions/workflows/maven.yml/badge.svg)
+![Coverage](https://github.com/alexmanrique/spring-boot-application-example/blob/badges/.github/badges/jacoco.svg)
+
 # Spring boot application example
 
 The project is based on a small web service which uses the following technologies:
