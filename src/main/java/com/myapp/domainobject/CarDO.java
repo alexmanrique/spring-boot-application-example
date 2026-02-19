@@ -19,7 +19,7 @@ import java.time.ZonedDateTime;
 @Entity
 @Table(
         name = "car",
-        uniqueConstraints = @UniqueConstraint(name = "uc_license_plate", columnNames = {"licenseplate"})
+        uniqueConstraints = @UniqueConstraint(name = "uc_license_plate", columnNames = {"license_plate"})
 )
 public class CarDO {
 

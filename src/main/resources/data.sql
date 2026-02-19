@@ -35,6 +35,6 @@ insert into driver (id, date_created, deleted, online_status, password, username
 insert into driver (id, date_created, deleted, online_status, password, username) values (8, now(), false, 'ONLINE',
 'driver08pw', 'driver08');
 
-insert into car (licenseplate, seat_count, convertible, rating, engine_type, manufacturer, date_created, deleted)
+insert into car (car_id, license_plate, seat_count, convertible, rating, engine_type, manufacturer, date_created, deleted)
 values
- ('4545PWR', 4, false, 9, 'GAS', 'MERCEDES', CURRENT_TIMESTAMP, false);
+ (1, '4545PWR', 4, false, 9, 'GAS', 'MERCEDES', CURRENT_TIMESTAMP, false);
