@@ -1,4 +1,4 @@
-![Build](https://github.com/alexmanrique/spring-boot-application-example/actions/workflows/maven.yml/badge.svg)
+![Build](https://github.com/alexmanrique/spring-boot-application-example/actions/workflows/maven.yml/badge.svg?branch=master)
 ![Coverage](https://github.com/alexmanrique/spring-boot-application-example/blob/badges/.github/badges/jacoco.svg)
 
 # Spring boot application example
