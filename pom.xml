@@ -6,7 +6,7 @@
     <groupId>com.myapp</groupId>
     <artifactId>myapp_server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>Spring boot application example</name>
     <description>Test project</description>
